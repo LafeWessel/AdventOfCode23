@@ -3,23 +3,28 @@ mod puzzles;
 use std::path::PathBuf;
 
 use clap::{Parser, ValueEnum};
-use puzzles::{puzzle::Puzzle, puzzle_01::Puzzle01};
+use puzzles::{
+    puzzle::Puzzle,
+    puzzle_01::{Puzzle011, Puzzle012},
+};
 
 #[derive(Clone, ValueEnum)]
 enum Puzzles {
-    Puzzle01,
+    Puzzle011,
+    Puzzle012,
 }
 
 impl Puzzles {
     fn puzzle(&self) -> Box<dyn Puzzle> {
         match self {
-            Puzzles::Puzzle01 => Box::new(Puzzle01 {}),
+            Puzzles::Puzzle011 => Box::new(Puzzle011 {}),
+            Puzzles::Puzzle012 => Box::new(Puzzle012 {}),
         }
     }
 
     fn puzzle_num(&self) -> u32 {
         match self {
-            Puzzles::Puzzle01 => 1,
+            Puzzles::Puzzle011 | Puzzles::Puzzle012 => 1,
         }
     }
 }
@@ -41,12 +46,13 @@ fn main() {
     let path = if let Some(ref path) = inf.input_file {
         path.clone()
     } else {
-        format!("puzzle_input/puzzle_{:0>2}", inf.puzzle.puzzle_num())
+        format!("puzzle_input/puzzle_{:0>2}.txt", inf.puzzle.puzzle_num())
     };
 
     if !PathBuf::from(&path).exists() {
         panic!("Input path {path:?} does not exist");
     }
 
-    inf.puzzle.puzzle().solve(&path);
+    let res = inf.puzzle.puzzle().solve(&path);
+    println!("{res}");
 }
