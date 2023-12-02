@@ -15,13 +15,13 @@ impl Puzzle for Puzzle011 {
 
         let v = rdr
             .lines()
-            .filter_map(|ln| ln.ok())
+            .map_while(Result::ok)
             .map(|ln| {
                 let vals = ln
                     .chars()
                     .filter_map(|c| c.to_digit(10))
                     .collect::<Vec<_>>();
-                10 * *vals.get(0).unwrap_or(&0)
+                10 * *vals.first().unwrap_or(&0)
                     + *vals.get(vals.len().saturating_sub(1)).unwrap_or(&0)
             })
             .sum::<u32>();
@@ -72,7 +72,7 @@ impl Puzzle for Puzzle012 {
 
         let v = rdr
             .lines()
-            .filter_map(|ln| ln.ok())
+            .map_while(Result::ok)
             .map(|ln| {
                 println!("{ln}");
                 let mut strn = String::new();
