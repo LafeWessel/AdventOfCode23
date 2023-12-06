@@ -7,6 +7,7 @@ use puzzles::{
     puzzle::Puzzle,
     puzzle_01::{Puzzle011, Puzzle012},
     puzzle_02::{Puzzle021, Puzzle022},
+    puzzle_03::{Puzzle031, Puzzle032},
 };
 
 #[derive(Clone, ValueEnum)]
@@ -15,6 +16,8 @@ enum Puzzles {
     Puzzle012,
     Puzzle021,
     Puzzle022,
+    Puzzle031,
+    Puzzle032,
 }
 
 impl Puzzles {
@@ -24,6 +27,8 @@ impl Puzzles {
             Puzzles::Puzzle012 => Box::new(Puzzle012 {}),
             Puzzles::Puzzle021 => Box::new(Puzzle021 {}),
             Puzzles::Puzzle022 => Box::new(Puzzle022 {}),
+            Puzzles::Puzzle031 => Box::new(Puzzle031 {}),
+            Puzzles::Puzzle032 => Box::new(Puzzle032 {}),
         }
     }
 
@@ -31,6 +36,7 @@ impl Puzzles {
         match self {
             Puzzles::Puzzle011 | Puzzles::Puzzle012 => 1,
             Puzzles::Puzzle021 | Puzzles::Puzzle022 => 2,
+            Puzzles::Puzzle031 | Puzzles::Puzzle032 => 3,
         }
     }
 }
