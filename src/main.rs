@@ -6,12 +6,15 @@ use clap::{Parser, ValueEnum};
 use puzzles::{
     puzzle::Puzzle,
     puzzle_01::{Puzzle011, Puzzle012},
+    puzzle_02::{Puzzle021, Puzzle022},
 };
 
 #[derive(Clone, ValueEnum)]
 enum Puzzles {
     Puzzle011,
     Puzzle012,
+    Puzzle021,
+    Puzzle022,
 }
 
 impl Puzzles {
@@ -19,12 +22,15 @@ impl Puzzles {
         match self {
             Puzzles::Puzzle011 => Box::new(Puzzle011 {}),
             Puzzles::Puzzle012 => Box::new(Puzzle012 {}),
+            Puzzles::Puzzle021 => Box::new(Puzzle021 {}),
+            Puzzles::Puzzle022 => Box::new(Puzzle022 {}),
         }
     }
 
     fn puzzle_num(&self) -> u32 {
         match self {
             Puzzles::Puzzle011 | Puzzles::Puzzle012 => 1,
+            Puzzles::Puzzle021 | Puzzles::Puzzle022 => 2,
         }
     }
 }
